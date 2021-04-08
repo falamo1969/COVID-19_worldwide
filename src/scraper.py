@@ -129,12 +129,12 @@ class CovidScraper:
             l_link_vacunas = l_li.find('a')
             self.get_vacunas_pais(pais, l_link_vacunas['href'])
         else:
-            print("Error: page {} not found.".format( self.url_base + pais_link[1]))
+            print("Error: page {} not found.".format(self.url_base + pais_link[1]))
 
     def scrap_write_csv(self, output_csv):
         df_datos = pd.merge(self.pd_confirmados, self.pd_vacunados, on=['País', 'Fecha'], how='left')
 
-        df_datos.to_csv(output_csv, encoding='latin-1', sep=',', header=True)
+        df_datos.to_csv(output_csv, encoding='latin-1', sep=',', header=True, index=False, na_rep='NA')
 
     def scrap_info_covid(self):
         # Start timer
