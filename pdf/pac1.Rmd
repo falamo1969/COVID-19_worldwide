@@ -31,13 +31,13 @@ En diciembre de 2019, un nuevo tipo de coronavirus, el SARS-CoV-2, aparece en la
 Para cada registro se recogen las siguientes características:
 
 * **País**: País en el que se obtienen los datos en formato string.  
-* **Fecha**: Fecha en la que se recogen los datos en formato date "dd/mm/yyyy".   
-* **Incremento_Muertos**: Número de muertos registrados en formato int.  
-* **Muertos**: Suma del número de muertos registrados desde el inicio de la pandemia en formato int.  
-* **Muertos_millon**: Número de muertos registrados por millón de habitantes en formato float.   
-* **Incremento_Confirmados**: Numero de nuevos casos confirmados en formato int.  
-* **Confirmados**: Suma del numero de nuevos casos confirmados desde el inicio de la pandemia en formato int.  
-* **Confirmados_100k_14d**: Media móvil de los casos positivos de los últimos 14 días por cien mil habitantes en formato float.   
+* **Fecha**: Fecha en la que se recogen los datos en formato "AAAA/MM/DD".   
+* **Incremento_Muertos**: Número de muertos registrados.  
+* **Muertos**: Suma del número de muertos registrados desde el inicio de la pandemia.  
+* **Muertos_millon**: Número de muertos registrados por millón de habitantes.   
+* **Incremento_Confirmados**: Numero de nuevos casos confirmados.  
+* **Confirmados**: Suma del numero de nuevos casos confirmados desde el inicio de la pandemia.
+* **Confirmados_100k_14d**: Numero de nuevos casos confirmados por cada 100.000 habitantes en los últimos 14 días.   
 
 Los autores de la web *https://datosmacro.expansion.com/* llevan recopilando información sobre la evolución del COVID-19 desde el inicio de la pandemia. Las fuentes utilizadas por datosmacro.expansión son el Ministerio de Sanidad y The Center for Systems Science and Engineering (CSSE) at JHU.
 
@@ -53,12 +53,9 @@ También podría ser de gran utilidad en el campo de la *minería de datos*, a l
 
 
 El presente conjunto de datos puede ser utilizarse desde diferentes ámbitos. Destacamos los principales agentes que pueden beneficiarse de este conjunto de datos y como:
-
-* **Empresas y organizaciones privadas:** Para analizar la evolución de la pandemia y optimizar su toma de decisiones en cuanto a su actividad.  
-
-* **Particulares:** Para disponer de información que les permita mantener actividades en entornos seguros y preveer el riesgo en cada momento. Para analizar y comparar los efectos de las medidas sanitarias implantadas en los diferentes paises.   
-
-* **Medios de comunicación:** Para analizar y comparar los efectos de las medidas sanitarias implantadas en los diferentes paises. Para informar sobre la evolución de la pandemia.  
+*   **Epresas y organizaciones privadas:** Para analizar la evolución de la pandemia y optimizar su toma de decisiones en cuanto a su actividad.
+*   **Particulares:** Para disponer de información que les permita mantener actividades en entornos seguros y preveer el riesgo en cada momento. Para analizar y comparar los efectos de las medidas sanitarias implantadas en los diferentes paises. 
+*   **Medios de comunicación:** Para analizar y comparar los efectos de las medidas sanitarias implantadas en los diferentes paises. Para informar sobre la evolución de la pandemia.
 
 ## Licencia
 

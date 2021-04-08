@@ -1,6 +1,6 @@
 from scraper import CovidScraper
 
-fichero = "info_covid.csv"
+fichero = "csv/info_covid.csv"
 
 scraper = CovidScraper()
 scraper.scrap_info_covid()

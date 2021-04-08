@@ -30,3 +30,4 @@ funcionamiento de la solución.
 
 ## Recursos
 
+Laia Subirats Maté & Mireia Calvo González, Web Scraping. UOC.
