@@ -17,8 +17,8 @@ La práctica está organizada en varios directorios:
 A su vez, el directorio raíz del proyecto contiene la licencia bajo la que se realiza el código y este fichero README  
 
 Los archivos con el código fuente son los siguientes:
-1. scraper.py. Contiene la implementación de la clase CovidScraper, con los métodos principales para inicialización y 
-   de la web lectura de la c
+1. scraper.py. Contiene la implementación de la clase CovidScraper, con los métodos principales para inicialización, 
+   lectura de la web y escritura de los resultados en un fichero.
 2. main.py. Contiene el código principal que ejecuta el web scraper.
    
 
@@ -30,3 +30,4 @@ funcionamiento de la solución.
 
 ## Recursos
 
+Laia Subirats Maté & Mireia Calvo González, Web Scraping. UOC.
