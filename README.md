@@ -3,7 +3,8 @@
 ## Descripción
 Esta práctica se ha realizado para la asignatura _Tipología y ciclo de vida de los datos_, y forma parte del master 
 en Ciencia de Datos de la Universitat Oberta de Catalunya. En ella, se aplican técnicas de _web scraping_ mediante el 
-lenguaje de programación Python para extraer datos de la web _datosmacro_ y generar un _dataset_ con datos de COVID-19.
+lenguaje de programación Python para extraer datos de la web _datosmacro_ y generar un _dataset_ con datos sobre el COVID-19
+y las vacunaciones.
 
 ## Miembros del equipo
 La práctica ha sido realizada conjuntamente por Daniel Padilla y Fernando Álamo.
