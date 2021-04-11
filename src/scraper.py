@@ -8,6 +8,15 @@ from bs4 import BeautifulSoup
 class CovidScraper:
 
     def __init__(self):
+        """ Inicializa la clase CovidScraper
+            Se inicializan los atributos fundamentales de la clase:
+            - url_ppal: URL de la página inicial para el web scraper
+            - url_base: URL de la página base donde están las páginas de los países
+            - links_paises: Lista que va a contener los links de los países
+            - page: HTML a tratar para obtener la información.
+            - pd_confirmados: Dataframe de pandas que contiene la información relativa a contagios
+            - pd_vacunados: Dataframe de pandas que contiene la información relativa a vacunas
+        """
         self.url_ppal = "https://datosmacro.expansion.com/otros/coronavirus"
         self.url_base = "https://datosmacro.expansion.com"
         self.links_paises = []
@@ -20,10 +29,18 @@ class CovidScraper:
         locale.setlocale(locale.LC_ALL, 'nl_NL')
 
     def get_html(self):
+        """ Lectura de la página HTML
+            Se carga la información en el atributo page.
+        :rtype: (int) código resultante de la lectura de la página.
+        """
         self.page = requests.get(self.url_ppal)
         return self.page.status_code
 
     def get_links(self):
+        """ Genera en el atributo de la clase links_paises la lista de links a leer, con el nombre del país
+            Se carga la información en el atributo page.
+        :rtype: (int) Número de países y links a tratar.
+        """
         soup = BeautifulSoup(self.page.content, "html.parser")
         # Búsqueda de la tabla general de los países con los datos recientes.
         tabla = soup.find('table', attrs={'class': 'table tabledat table-striped table-condensed table-hover'})
@@ -40,9 +57,15 @@ class CovidScraper:
         return len(self.links_paises)
 
     def get_vacunas_pais(self, pais, link):
+        """ Lee la tabla que contiene información sobre las vacunas del país. El enlace se pasa por parámetro.
+            La función acepta dos parámetros:
+                'pais': Nombre del país en español del que se va a leer la información de vacunas
+                'link': Sufijo a adicionar a la dirección url_base para generar la URL de la página a leer.
+        """
         l_datos = []
         l_page = requests.get(self.url_base + link)
         if l_page.status_code == 200:
+            # Lectura correcta de la página
             l_soup = BeautifulSoup(l_page.content, "html.parser")
             l_tabla = l_soup.find('table', attrs={'class': 'table tabledat table-striped table-condensed table-hover'})
             # Para obtener el nest dónde está la info de los nombres y enlaces
@@ -77,9 +100,15 @@ class CovidScraper:
             print("Error: Vaccine data from {} not found, page: {}.".format(pais, self.url_base + link))
 
     def get_info_pais(self, pais_link):
+        """ Lee la tabla que contiene información sobre las vacunas del país. El enlace se pasa por parámetro.
+            La función acepta dos parámetros:
+                'pais_link': lista que contiene el nombre país y el sufijo de la página en la que se encuentra
+                             la información de los contagios
+        """
         l_datos = []
         l_page = requests.get(self.url_base + pais_link[1])
         if l_page.status_code == 200:
+            # Lectura correcta de la página
             l_soup = BeautifulSoup(l_page.content, "html.parser")
             l_tabla = l_soup.find('table', attrs={'class': 'table tabledat table-striped table-condensed table-hover'})
             # Para obtener el nest dónde está la info de los nombres y enlaces
@@ -132,11 +161,19 @@ class CovidScraper:
             print("Error: page {} not found.".format(self.url_base + pais_link[1]))
 
     def scrap_write_csv(self, output_csv):
+        """ Escribe en formato csv la información recogida en las páginas tratadas. Toma un parámetro:
+                'output_csv': Nombre del fichero output que va a recibir los datos leídos en el scraper. Los datos
+                vacíos se codifican como 'NA'
+        """
+        # Se une la información de contagios y vacunas en el mismo dataframe para escribirlo en fichero.
         df_datos = pd.merge(self.pd_confirmados, self.pd_vacunados, on=['País', 'Fecha'], how='left')
-
+        # Escritura del fichero, con la codificación adecuada para recoger caracteres en español. Los datos vacíos
+        # se codifican como NA
         df_datos.to_csv(output_csv, encoding='latin-1', sep=',', header=True, index=False, na_rep='NA')
 
     def scrap_info_covid(self):
+        """ Lanza el scraper de forma ordenada.
+        """
         # Start timer
         start_time = time.time()
 
@@ -147,7 +184,11 @@ class CovidScraper:
 
         for pais in self.links_paises:
             print("Reading data for {}".format(pais[0]))
+            t1 = time.time()
             self.get_info_pais(pais)
+            t2 = time.time()
+            # Retrasamos las peticiones consecutivas para evitar colapso del servidor o bloqueo del scraper.
+            time.sleep(10 * (t2-t1))
 
         # Show elapsed time
         end_time = time.time()
